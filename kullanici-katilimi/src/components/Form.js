@@ -29,7 +29,8 @@ const Form1 = (props) => {
    
     // required isn't required for checkboxes.
 
-    name: Yup.string().required("İsim Soyisim alanı boş bırakılamaz."),
+    name: Yup.string().required("İsim Soyisim alanı boş bırakılamaz.").min(3,"İsim uzunluğu 3 karakterden az olmaz"),
+   
 
     email:Yup.string()
       .email("Lütfen geçerli bir e-mail giriniz.")
@@ -81,6 +82,7 @@ const Form1 = (props) => {
     
     formSchema.isValid(product).then((valid) => setFormValid(valid));
     console.log("bilgi",product);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   return (
@@ -95,6 +97,7 @@ const Form1 = (props) => {
             value={product.name}
             onChange={changeHandler}
             invalid={!!formErrors.name}
+            data-cy="test_name"
           ></Input>
       <FormFeedback>{formErrors.name}</FormFeedback>
 
@@ -108,6 +111,7 @@ const Form1 = (props) => {
             value={product.email}
             onChange={changeHandler}
             invalid={!!formErrors.email} 
+            data-cy="test_email"
           ></Input>
         
       </div>
@@ -124,6 +128,7 @@ const Form1 = (props) => {
             value={product.password}
             onChange={changeHandler}
             invalid={!!formErrors.password} 
+            data-cy="test_password"
           ></Input>
       </div>
       <FormFeedback>{formErrors.password}</FormFeedback>
@@ -139,6 +144,7 @@ const Form1 = (props) => {
             checked={product.tos}
             onChange={changeHandler}
             invalid={!!formErrors.tos} 
+            data-cy="test_tos"
           ></Input>
         
       </div>
@@ -151,6 +157,7 @@ const Form1 = (props) => {
       onChange={changeHandler}
       type="select"
       invalid={!!formErrors.select} 
+      data-cy="test_select"
     >
        <option value={""} disabled>
      Lütfen rolü seçiniz..
